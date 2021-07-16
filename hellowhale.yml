@@ -18,7 +18,8 @@ spec:
     spec:
       containers:
       - name:my-nginx-container
-        image: poojakk123/hellowhale:latest
+        image: poojakk123/hellowhale
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
 ---
