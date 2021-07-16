@@ -30,10 +30,19 @@ pipeline {
         }
 
     
+//     stage('Deploy App') {
+//       steps {
+//         script {
+//           kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
+//         }
+//       }
+//     }
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "hellowhale.yml", kubeconfigId: "mykubeconfig")
+         withKubeConfig([credentialsId: 'kubeconfig', serverUrl: 'https://127.0.0.1:32779']) {
+            bat 'kubectl apply -f hellowhale.yml'
+    }
         }
       }
     }
